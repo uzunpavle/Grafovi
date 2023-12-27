@@ -199,6 +199,7 @@ namespace Grafovi
                     foreach (Cvor cvor in graf.cvorici)
                     {
                         graf_matrica.DodajCvor(cvor);
+                        Graf_Matrica.index_cvorova++;
                     }
 
                     while (grane.Count > 0)
@@ -211,7 +212,7 @@ namespace Grafovi
                         foreach (Cvor cvor in graf_matrica.cvorovi)
                         {
                             if (cvor.ime == trenutna_grana.odakle.ime)
-                            {
+                            {                               
                                 index1 = cvor.index;
                             }
                             if (cvor.ime == trenutna_grana.dokle.ime)
@@ -225,7 +226,7 @@ namespace Grafovi
                         grane.Remove(trenutna_grana);
                     }
 
-                    bool orijentisan = true;
+                    bool orijentisan = false;
 
                     for (int v = 0; v < graf.broj_cvorova - 1; v++)
                     {
@@ -234,11 +235,11 @@ namespace Grafovi
                         {
                             if (graf_matrica.matrica[v,k] != graf_matrica.matrica[k,v])
                             {
-                                orijentisan = false;
+                                orijentisan = true;
                             }
                         }
                     }
-
+                    graf_matrica.Ispisi();
                     if (orijentisan == true)
                     {
                         Console.WriteLine("Graf je orijentisan.");
@@ -247,7 +248,6 @@ namespace Grafovi
                     {
                         Console.WriteLine("Graf je neorijentisan.");
                     }
-
                     Graf_Matrica.index_cvorova = prvobitni_index;
                 }
                 if (akcija == 6)
